@@ -22,13 +22,11 @@
     <section>
         <ul class="gallery"></ul>
     </section>
-    <div class="loader">
-        <div class="dots"></div>
-    </div>
-    <dialog>
-        <div class="scrim"></div>
+    <div class="loader"></div>
+    <dialog aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="scrim" aria-hidden="true"></div>
         <div class="dialog-container"></div>
-        <div class="toast"></div>
+        <div class="toast" aria-hidden="true"></div>
     </dialog>
     <script src="script.js"></script>
 </body>
