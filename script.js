@@ -14,12 +14,12 @@ function showToast(hex) {
     const toast = document.querySelector('.toast');
     toast.classList.add('visible');
     toast.setAttribute('aria-hidden', 'false');
-    toast.innerText = `Copied ${hex}`;
+    toast.innerText = `Copied HEX code: ${hex}`;
     setTimeout(() => {
         toast.classList.remove('visible');
         toast.setAttribute('aria-hidden', 'true');
         toast.innerText = '';
-    }, 1500);
+    }, 2000);
 }
 
 
@@ -101,7 +101,7 @@ function openDialog(
 }
 
 
-async function createGallery(data) {
+function createGallery(data) {
     const items = data.map(item => {
         const {
             id,
@@ -169,7 +169,9 @@ async function createGallery(data) {
 
 
 async function getData(url) {
-    const settings = { headers: { Authorization: apiKey } };
+    const settings = {
+        headers: { Authorization: apiKey }
+    };
     try {
         const res = await fetch(url, settings);
         const data = await res.json();
