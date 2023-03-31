@@ -1,11 +1,30 @@
-const gallery = document.querySelector('.gallery');
+const body = document.body;
 const dialog = document.querySelector('dialog');
 const loader = document.querySelector('.loader');
 const apiKey = 'NiNRjQTmXyxC2698onGYqbzDUeQJ4MHpTcoAiWni7DkTnXfvoCpCzqDL';
 const perPage = 16;
 
 
-let currentPage = 0;
+let currentPage = 1;
+let photoIndex = 1;
+
+
+function showToast(hex) {
+    const toast = document.querySelector('.toast');
+    toast.classList.add('visible');
+    toast.innerText = `Copied ${hex}`;
+    setTimeout(() => {
+        toast.classList.remove('visible');
+        toast.innerText = '';
+    }, 1500);
+}
+
+
+function copyPalette(palette) {
+    const clipboard = navigator.clipboard;
+    clipboard.writeText(palette)
+    .then(() => showToast(palette));
+}
 
 
 function downloadImage(image) {
@@ -20,55 +39,60 @@ function downloadImage(image) {
 }
 
 
-function openDialog(a, b, c, d, e, f, g) {
-    document.body.style.overflow = 'hidden';
+function closeDialog() {
+    dialog.classList.remove('expanded');
+    dialog.querySelector('.dialog-container').innerHTML = '';
+    body.style.overflow = 'auto';
+}
+
+
+function openDialog(ab, bc, cd, de, ef, fg, gh, hi, ij) {
+    body.style.overflow = 'hidden';
     dialog.classList.add('expanded');
     dialog.querySelector('.dialog-container').innerHTML += `
     <div class="dialog-header">
         <i class="material-symbols-rounded">photo_camera</i>
-        <h2>${a}</h2>
+        <h2 id="${ef}">${ab}</h2>
         <button onclick="closeDialog()"><i class="material-symbols-rounded">close</i></button>
     </div>
     <div class="dialog-content">
-        <img src="${b}" alt="${c}">
+        <img src="${bc}" alt="${cd}" data-height="${gh}" data-width="${fg}">
     </div>
     <div class="dialog-footer">
         <div class="column">
-            <a href="${d}" target="_blank">${a}</a>
-            <h4>${e}x${f}</h4>
-            <div class="flex">
-                <h4>${g}</h4>
-                <span style="background-color: ${g}"></span>
-            </div>
+            <a href="${de}" target="_blank"><i class="material-symbols-rounded">person</i></a>
         </div>
         <div class="column">
-            <div class="flex">
-                <button id="download-btn" data-img="${b}" onclick="downloadImage('${b}')"><i class="material-symbols-rounded">download</i></button>
-                <a href="${b}" target="_blank"><i class="material-symbols-rounded">open_in_new</i></a>
-            </div>
+            <a href="${bc}" target="_blank"><i class="material-symbols-rounded">open_in_new</i></a>
+        </div>
+        <div class="column">
+            <button data-color="${hi}" onclick="copyPalette('${hi}')"><i class="material-symbols-rounded" style="color: ${hi}">launcher_assistant_on</i></button>
+        </div>
+        <div class="column">
+            <button data-img="${bc}" onclick="downloadImage('${bc}')"><i class="material-symbols-rounded">download</i></buton>
         </div>
     </div>
-    `;
+    `
 }
 
 
-function closeDialog() {
-    dialog.classList.remove('expanded');
-    dialog.querySelector('.dialog-container').innerHTML = '';
-    document.body.style.overflow = 'auto';
-}
-
-
-function createGallery(items) {
-    gallery.innerHTML += items.map(item => `
-    <li class="item" onclick="openDialog('${item.photographer}', '${item.src.large2x}', '${item.alt}', '${item.photographer_url}', '${item.width}', '${item.height}', '${item.avg_color}')">
-        <img src="${item.src.large2x}" alt="${item.name}">
-        <div class="item-details">
-            <i class="material-symbols-rounded">photo_camera</i>
-            <h3>${item.photographer}</h3>
-        </div>
-    </li>
-    `).join('');
+function createGallery(photos) {
+    const ul = document.querySelector('.gallery');
+    const gallery = photos.map((photo, i) => {
+        const { alt, avg_color, height, id, photographer, photographer_id, photographer_url, src: { large2x }, width } = photo;
+        photoIndex++
+        i = photoIndex;
+        return `
+        <li class="item" id="${id}" onclick="openDialog('${photographer}', '${large2x}', '${alt}', '${photographer_url}', '${photographer_id}', '${width}', '${height}', '${avg_color}')">
+            <img src="${large2x}" alt="${photographer}">
+            <div class="item-details">
+                <i class="material-symbols-rounded">photo_camera</i>
+                <h3>(${i}) ${photographer}</h3>
+            </div>
+        </li>
+        `
+    }).join('');
+    ul.innerHTML += `${gallery}`;
 }
 
 

@@ -15,7 +15,8 @@ html {
 
 body {
     font-size: 16px;
-    background: rgb(255,251,255);
+    color: #5f6368;
+    background: rgb(255, 250, 255);
     font-family: 'Inter Tight', sans-serif;
     max-inline-size: 100%;
     -webkit-font-smoothing: antialiased;
@@ -82,7 +83,7 @@ section {
     padding: .5rem;
     transition: bottom 0.2s ease;
     color: #ffffff;
-    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
 }
 
 .item-details h3 {
@@ -158,10 +159,13 @@ section {
     0% {
         box-shadow: 9984px 0 0 -5px;
     }
+
     30% {
         box-shadow: 9984px 0 0 2px;
     }
-    60%, 100% {
+
+    60%,
+    100% {
         box-shadow: 9984px 0 0 -5px;
     }
 }
@@ -170,10 +174,13 @@ section {
     0% {
         box-shadow: 9999px 0 0 -5px;
     }
+
     30% {
         box-shadow: 9999px 0 0 2px;
     }
-    60%, 100% {
+
+    60%,
+    100% {
         box-shadow: 9999px 0 0 -5px;
     }
 }
@@ -182,10 +189,13 @@ section {
     0% {
         box-shadow: 10014px 0 0 -5px;
     }
+
     30% {
         box-shadow: 10014px 0 0 2px;
     }
-    60%, 100% {
+
+    60%,
+    100% {
         box-shadow: 10014px 0 0 -5px;
     }
 }
@@ -238,7 +248,7 @@ dialog.expanded {
     pointer-events: inherit;
     visibility: visible;
     z-index: 0;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .6);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -262,7 +272,7 @@ dialog.expanded {
     transform: scale(1);
     transform-origin: center bottom;
     z-index: 24;
-    background: rgb(255,251,255);
+    background: rgb(255, 250, 255);
     will-change: display, transform;
 }
 
@@ -275,6 +285,7 @@ dialog.expanded .dialog-container {
     0% {
         transform: scale(0)
     }
+
     100% {
         transform: scale(1);
     }
@@ -315,54 +326,59 @@ dialog.expanded .dialog-container {
 .dialog-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1rem;
 }
 
 .dialog-footer .column {
     display: flex;
-    flex-direction: column;
-    gap: .5rem;
-}
-
-.dialog-footer .flex {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-}
-
-.dialog-footer .column > a {
-    font-size: 1.0275rem;
-    font-family: 'Inter Tight', sans-serif;
-    color: #202124;
-    font-weight: 450;
-}
-
-.dialog-footer h4 {
-    font-size: 1.0275rem;
-    color: #202124;
-    font-weight: 425;
-}
-
-.dialog-footer span {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1rem;
-    height: 1rem;
-    border-radius: .125rem;
 }
 
 .dialog-footer button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: #5f6368;
 }
 
-.dialog-footer .column .flex a {
+.dialog-footer a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: #5f6368;
+}
+
+.dialog-footer .material-symbols-rounded {
+    font-size: 1.5rem;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #202124;
+    font-size: .875rem;
+    font-weight: 500;
+    color: #ffffff;
+    border-radius: .25rem;
+    padding: .5rem .75rem;
+    opacity: 0;
+    transition: all .25s ease-out;
+    width: min-content;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.toast.visible {
+    opacity: 1;
+    bottom: 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -370,27 +386,27 @@ dialog.expanded .dialog-container {
         grid-column: span 2;
         grid-row: span 2;
     }
-    
+
     .item:nth-child(12n + 2) {
         grid-column: span 1;
         grid-row: span 2;
     }
-    
+
     .item:nth-child(12n + 5) {
         grid-column: span 2;
         grid-row: span 1;
     }
-    
+
     .item:nth-child(12n + 8) {
         grid-column: span 2;
         grid-row: span 2;
     }
-    
+
     .item:nth-child(12n + 10) {
         grid-column: span 1;
         grid-row: span 2;
     }
-    
+
     .item:nth-child(12n + 12) {
         grid-column: span 2;
         grid-row: span 2;
@@ -410,32 +426,32 @@ dialog.expanded .dialog-container {
         grid-column: span 2;
         grid-row: span 2;
     }
-    
+
     .item:nth-child(8n + 4) {
         grid-column: span 2;
         grid-row: span 1;
     }
-    
+
     .item:nth-child(8n + 5) {
         grid-column: span 2;
         grid-row: span 1;
     }
-    
+
     .item:nth-child(8n + 6) {
         grid-column: span 2;
         grid-row: span 2;
     }
-    
+
     .item:nth-child(8n + 12) {
         grid-column: span 2;
         grid-row: span 1;
     }
-    
+
     .item:nth-child(8n + 13) {
         grid-column: span 2;
         grid-row: span 1;
     }
-    
+
     .item:nth-child(8n + 14) {
         grid-column: span 2;
         grid-row: span 2;
