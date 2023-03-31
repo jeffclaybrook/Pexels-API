@@ -1,0 +1,448 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    max-inline-size: 100%;
+}
+
+body {
+    font-size: 16px;
+    background: rgb(255,251,255);
+    font-family: 'Inter Tight', sans-serif;
+    max-inline-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    max-width: 100%;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+}
+
+section {
+    display: block;
+    padding: .25rem;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 150px 150px;
+    gap: .25rem;
+    margin-bottom: 3.25rem;
+}
+
+.item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.item img {
+    display: block;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.item-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .5rem;
+    transition: bottom 0.2s ease;
+    color: #ffffff;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+}
+
+.item-details h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-right: auto;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.item-details .material-symbols-rounded {
+    font-size: 1.25rem;
+}
+
+.loader {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: none;
+}
+
+.loader.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dots {
+    position: relative;
+    left: -9999px;
+    width: .575rem;
+    height: .575rem;
+    border-radius: .325rem;
+    background: #203f71;
+    color: #203f71;
+    box-shadow: 9999px 0 0 -5px;
+    animation: dots 1.5s infinite linear;
+    animation-delay: .25s;
+}
+
+.dots::before,
+.dots::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: .625rem;
+    height: .625rem;
+    border-radius: 5px;
+    background: #203f71;
+    color: #203f71;
+}
+
+.dots::before {
+    box-shadow: 9984px 0 0 -5px;
+    animation: dots-before 1.5s infinite linear;
+    animation-delay: 0s;
+}
+
+.dots::after {
+    box-shadow: 10014px 0 0 -5px;
+    animation: dots-after 1.5s infinite linear;
+    animation-delay: .5s;
+}
+
+@keyframes dots-before {
+    0% {
+        box-shadow: 9984px 0 0 -5px;
+    }
+    30% {
+        box-shadow: 9984px 0 0 2px;
+    }
+    60%, 100% {
+        box-shadow: 9984px 0 0 -5px;
+    }
+}
+
+@keyframes dots {
+    0% {
+        box-shadow: 9999px 0 0 -5px;
+    }
+    30% {
+        box-shadow: 9999px 0 0 2px;
+    }
+    60%, 100% {
+        box-shadow: 9999px 0 0 -5px;
+    }
+}
+
+@keyframes dots-after {
+    0% {
+        box-shadow: 10014px 0 0 -5px;
+    }
+    30% {
+        box-shadow: 10014px 0 0 2px;
+    }
+    60%, 100% {
+        box-shadow: 10014px 0 0 -5px;
+    }
+}
+
+dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    inset-block-start: 0px;
+    inset-inline-start: 0px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    block-size: 100%;
+    max-block-size: none;
+    inline-size: 100%;
+    max-inline-size: none;
+    margin: 0;
+    border: none;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 24;
+    background-color: transparent;
+    transition: opacity 0s ease 0s;
+    will-change: opacity;
+}
+
+dialog::backdrop {
+    display: none;
+}
+
+dialog.expanded {
+    display: flex;
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transition-duration: .15s;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.scrim {
+    position: fixed;
+    inset: 0px;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    block-size: 100%;
+    inline-size: 100%;
+    pointer-events: inherit;
+    visibility: visible;
+    z-index: 0;
+    background: rgba(0,0,0,.5);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.scrim::after {
+    content: '';
+    display: block;
+    block-size: 200%;
+    inline-size: 200%;
+}
+
+.dialog-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    block-size: 100%;
+    max-block-size: 100%;
+    min-inline-size: 280px;
+    max-inline-size: 700px;
+    flex-shrink: 1;
+    transform: scale(1);
+    transform-origin: center bottom;
+    z-index: 24;
+    background: rgb(255,251,255);
+    will-change: display, transform;
+}
+
+dialog.expanded .dialog-container {
+    animation-name: scaleUp;
+    animation-duration: .15s;
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(0)
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .75rem;
+    padding: 1rem;
+}
+
+.dialog-header h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-right: auto;
+}
+
+.dialog-header button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog-content {
+    overflow: hidden;
+    display: flex;
+}
+
+.dialog-content img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.dialog-footer .column {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.dialog-footer .flex {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.dialog-footer .column > a {
+    font-size: 1.0275rem;
+    font-family: 'Inter Tight', sans-serif;
+    color: #202124;
+    font-weight: 450;
+}
+
+.dialog-footer h4 {
+    font-size: 1.0275rem;
+    color: #202124;
+    font-weight: 425;
+}
+
+.dialog-footer span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    border-radius: .125rem;
+}
+
+.dialog-footer button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog-footer .column .flex a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .item:nth-child(12n + 1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .item:nth-child(12n + 2) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    
+    .item:nth-child(12n + 5) {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .item:nth-child(12n + 8) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .item:nth-child(12n + 10) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+    
+    .item:nth-child(12n + 12) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 200px 200px;
+        max-width: 850px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .item:nth-child(8n + 1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .item:nth-child(8n + 4) {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .item:nth-child(8n + 5) {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .item:nth-child(8n + 6) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .item:nth-child(8n + 12) {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .item:nth-child(8n + 13) {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .item:nth-child(8n + 14) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .dialog-container {
+        block-size: 85%;
+        border-radius: .5rem;
+    }
+}
