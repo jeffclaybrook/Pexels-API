@@ -53,23 +53,33 @@ function openDialog(ab, bc, cd, de, ef, fg, gh, hi, ij) {
     <div class="dialog-header">
         <i class="material-symbols-rounded">photo_camera</i>
         <h2 id="${ef}">${ab}</h2>
-        <button onclick="closeDialog()"><i class="material-symbols-rounded">close</i></button>
+        <button onclick="closeDialog()">
+            <i class="material-symbols-rounded">close</i>
+        </button>
     </div>
     <div class="dialog-content">
         <img src="${bc}" alt="${cd}" data-height="${gh}" data-width="${fg}">
     </div>
     <div class="dialog-footer">
         <div class="column">
-            <a href="${de}" target="_blank"><i class="material-symbols-rounded">person</i></a>
+            <a href="${de}" target="_blank">
+                <i class="material-symbols-rounded">person</i>
+            </a>
         </div>
         <div class="column">
-            <a href="${bc}" target="_blank"><i class="material-symbols-rounded">open_in_new</i></a>
+            <a href="${bc}" target="_blank">
+                <i class="material-symbols-rounded">open_in_new</i>
+            </a>
         </div>
         <div class="column">
-            <button data-color="${hi}" onclick="copyPalette('${hi}')"><i class="material-symbols-rounded" style="color: ${hi}">launcher_assistant_on</i></button>
+            <button data-color="${hi}" onclick="copyPalette('${hi}')">
+                <i class="material-symbols-rounded" style="color: ${hi}">launcher_assistant_on</i>
+            </button>
         </div>
         <div class="column">
-            <button data-img="${bc}" onclick="downloadImage('${bc}')"><i class="material-symbols-rounded">download</i></buton>
+            <button data-img="${bc}" onclick="downloadImage('${bc}')">
+                <i class="material-symbols-rounded">download</i>
+            </buton>
         </div>
     </div>
     `
