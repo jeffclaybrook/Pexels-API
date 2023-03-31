@@ -313,7 +313,7 @@ dialog.expanded .dialog-container {
 .dialog-content {
     overflow: hidden;
     display: flex;
-    block-size: 80%;
+    block-size: 100%;
 }
 
 .dialog-content img {
