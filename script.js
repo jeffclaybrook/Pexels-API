@@ -88,7 +88,7 @@ function openDialog(
         </div>
         <div class="column">
             <button data-color="${hi}" onclick="copyPalette('${hi}')" aria-label="Copy HEX code">
-                <i class="material-symbols-rounded" style="color: ${hi}">launcher_assistant_on</i>
+                <i class="material-symbols-rounded" style="color: ${hi}">content_copy</i>
             </button>
         </div>
         <div class="column">
